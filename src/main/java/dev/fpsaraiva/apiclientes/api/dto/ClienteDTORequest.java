@@ -1,6 +1,7 @@
 package dev.fpsaraiva.apiclientes.api.dto;
 
 import dev.fpsaraiva.apiclientes.model.entity.Cliente;
+import dev.fpsaraiva.apiclientes.validation.ValidDocument;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ public class ClienteDTORequest {
     private String nome;
 
     @NotBlank
+    @ValidDocument
     private String documento;
 
     @NotNull
