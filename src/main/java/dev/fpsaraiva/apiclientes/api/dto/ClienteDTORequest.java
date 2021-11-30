@@ -1,10 +1,13 @@
 package dev.fpsaraiva.apiclientes.api.dto;
 
 import dev.fpsaraiva.apiclientes.model.entity.Cliente;
-import dev.fpsaraiva.apiclientes.validation.ValidDocument;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteDTORequest {
 
@@ -12,23 +15,29 @@ public class ClienteDTORequest {
     private String nome;
 
     @NotBlank
-    @ValidDocument
+    //@ValidDocument
     private String documento;
 
     @NotNull
     private String endereco;
 
     @NotNull
-    private String telefone;
+    @Size(min = 1)
+    @Valid
+    private List<TelefoneDTORequest> telefones = new ArrayList<>();;
 
-    public ClienteDTORequest(String nome, String documento, String endereco, String telefone) {
+    public ClienteDTORequest(String nome, String documento, String endereco, List<TelefoneDTORequest> telefones) {
         this.nome = nome;
         this.documento = documento;
         this.endereco = endereco;
-        this.telefone = telefone;
+        this.telefones.addAll(telefones);
+    }
+
+    public List<TelefoneDTORequest> getTelefones() {
+        return telefones;
     }
 
     public Cliente toModel() {
-        return new Cliente(nome, documento, endereco, telefone);
+        return new Cliente(nome, documento, endereco, telefones);
     }
 }

@@ -1,10 +1,14 @@
 package dev.fpsaraiva.apiclientes.model.entity;
 
+import dev.fpsaraiva.apiclientes.api.dto.TelefoneDTORequest;
 import dev.fpsaraiva.apiclientes.model.repository.ClienteRepository;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_cliente")
@@ -12,6 +16,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente")
     private Long id;
 
     @NotBlank
@@ -23,17 +28,18 @@ public class Cliente {
     @NotBlank
     private String endereco;
 
-    @NotBlank
-    private String telefone;
+    @Size(min = 1)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
+    private List<Telefone> telefones = new ArrayList<>();
 
     @Column(name = "data_cadastro")
     private LocalDateTime criadoEm;
 
-    public Cliente(String nome, String documento, String endereco, String telefone) {
+    public Cliente(String nome, String documento, String endereco, List<TelefoneDTORequest> telefones) {
         this.nome = nome;
         this.documento = documento;
         this.endereco = endereco;
-        this.telefone = telefone;
+        telefones.forEach(telefone -> this.telefones.add(telefone.toModel(this)));
         this.criadoEm = LocalDateTime.now();
     }
 
