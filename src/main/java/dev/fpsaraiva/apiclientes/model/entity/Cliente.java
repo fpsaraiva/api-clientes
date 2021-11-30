@@ -1,5 +1,7 @@
 package dev.fpsaraiva.apiclientes.model.entity;
 
+import dev.fpsaraiva.apiclientes.model.repository.ClienteRepository;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -37,5 +39,9 @@ public class Cliente {
 
     public Long getId() {
         return id;
+    }
+
+    public boolean possuiDocumentoCadastrado(ClienteRepository clienteRepository) {
+        return clienteRepository.existsByDocumento(documento);
     }
 }
