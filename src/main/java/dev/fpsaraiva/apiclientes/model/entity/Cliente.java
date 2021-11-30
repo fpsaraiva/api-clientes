@@ -15,23 +15,27 @@ public class Cliente {
     @NotBlank
     private String nome;
 
-    //TODO: documento (cpf/cnpj) não pode ser duplicado
+    @NotBlank
     private String documento;
 
-    //TODO: definir relacionamento
-    private Endereco endereco;
+    @NotBlank
+    private String endereco;
 
-    //TODO: definir relacionamento
-    private Telefone telefone;
+    @NotBlank
+    private String telefone;
 
     @Column(name = "data_cadastro")
     private LocalDateTime criadoEm;
 
-    public Cliente(String nome, String documento, Endereco endereco, Telefone telefone) {
+    public Cliente(String nome, String documento, String endereco, String telefone) {
         this.nome = nome;
         this.documento = documento;
         this.endereco = endereco;
         this.telefone = telefone;
         this.criadoEm = LocalDateTime.now();
+    }
+
+    public Long getId() {
+        return id;
     }
 }
