@@ -1,5 +1,6 @@
 package dev.fpsaraiva.apiclientes.exception;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -36,5 +37,14 @@ public class HandlerAdvice {
 
         ErroPadronizado erroPadronizado = new ErroPadronizado(mensagens);
         return ResponseEntity.status(apiErroException.getHttpStatus()).body(erroPadronizado);
+    }
+
+    @ExceptionHandler(InvalidFormatException.class)
+    public ResponseEntity<ErroPadronizado> handleApiErroException(InvalidFormatException invalidFormatException) {
+        Collection<String> mensagens = new ArrayList<>();
+        mensagens.add("ERRO no tipo de telefone informado! Os tipos disponíveis para registro são: CELULAR, COMERCIAL, RESIDENCIAL.");
+
+        ErroPadronizado erroPadronizado = new ErroPadronizado(mensagens);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erroPadronizado);
     }
 }

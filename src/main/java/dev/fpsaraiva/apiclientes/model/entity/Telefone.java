@@ -1,5 +1,7 @@
 package dev.fpsaraiva.apiclientes.model.entity;
 
+import dev.fpsaraiva.apiclientes.model.enums.TipoTelefone;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -17,8 +19,9 @@ public class Telefone {
     @NotBlank
     private String numero;
 
-    @NotBlank
-    private String tipo;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private TipoTelefone tipo;
 
     @NotNull
     @ManyToOne
@@ -28,7 +31,7 @@ public class Telefone {
     @Column(name = "data_cadastro")
     private LocalDateTime criadoEm;
 
-    public Telefone(String numero, String tipo, Cliente cliente) {
+    public Telefone(String numero, TipoTelefone tipo, Cliente cliente) {
         this.numero = numero;
         this.tipo = tipo;
         this.cliente = cliente;
