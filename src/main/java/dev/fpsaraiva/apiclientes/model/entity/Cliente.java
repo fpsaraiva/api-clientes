@@ -1,5 +1,6 @@
 package dev.fpsaraiva.apiclientes.model.entity;
 
+import dev.fpsaraiva.apiclientes.api.dto.EnderecoDTORequest;
 import dev.fpsaraiva.apiclientes.api.dto.TelefoneDTORequest;
 import dev.fpsaraiva.apiclientes.model.repository.ClienteRepository;
 
@@ -25,8 +26,9 @@ public class Cliente {
     @NotBlank
     private String documento;
 
-    @NotBlank
-    private String endereco;
+    @Size(min = 1)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
+    private List<Endereco> enderecos = new ArrayList<>();
 
     @Size(min = 1)
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
@@ -35,10 +37,10 @@ public class Cliente {
     @Column(name = "data_cadastro")
     private LocalDateTime criadoEm;
 
-    public Cliente(String nome, String documento, String endereco, List<TelefoneDTORequest> telefones) {
+    public Cliente(String nome, String documento, List<EnderecoDTORequest> enderecos, List<TelefoneDTORequest> telefones) {
         this.nome = nome;
         this.documento = documento;
-        this.endereco = endereco;
+        enderecos.forEach(endereco -> this.enderecos.add(endereco.toModel(this)));
         telefones.forEach(telefone -> this.telefones.add(telefone.toModel(this)));
         this.criadoEm = LocalDateTime.now();
     }

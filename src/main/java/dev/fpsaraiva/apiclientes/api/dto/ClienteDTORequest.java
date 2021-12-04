@@ -19,18 +19,24 @@ public class ClienteDTORequest {
     private String documento;
 
     @NotNull
-    private String endereco;
+    @Size(min = 1)
+    @Valid
+    private List<EnderecoDTORequest> enderecos = new ArrayList<>();
 
     @NotNull
     @Size(min = 1)
     @Valid
-    private List<TelefoneDTORequest> telefones = new ArrayList<>();;
+    private List<TelefoneDTORequest> telefones = new ArrayList<>();
 
-    public ClienteDTORequest(String nome, String documento, String endereco, List<TelefoneDTORequest> telefones) {
+    public ClienteDTORequest(String nome, String documento, List<EnderecoDTORequest> enderecos, List<TelefoneDTORequest> telefones) {
         this.nome = nome;
         this.documento = documento;
-        this.endereco = endereco;
+        this.enderecos.addAll(enderecos);
         this.telefones.addAll(telefones);
+    }
+
+    public List<EnderecoDTORequest> getEnderecos() {
+        return enderecos;
     }
 
     public List<TelefoneDTORequest> getTelefones() {
@@ -38,6 +44,6 @@ public class ClienteDTORequest {
     }
 
     public Cliente toModel() {
-        return new Cliente(nome, documento, endereco, telefones);
+        return new Cliente(nome, documento, enderecos, telefones);
     }
 }
