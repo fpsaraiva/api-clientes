@@ -50,5 +50,14 @@ public class ClienteController {
 
     //TODO: atualizar cliente
 
-    //TODO: deletar cliente
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        try {
+            Cliente clienteBuscado = clienteService.getById(id).get();
+            clienteService.delete(clienteBuscado);
+        } catch (NoSuchElementException ex) {
+            throw new ApiErroException(HttpStatus.NOT_FOUND, "Não foi encontrado cliente com o ID informado.");
+        }
+    }
 }

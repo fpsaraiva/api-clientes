@@ -27,11 +27,11 @@ public class Cliente {
     private String documento;
 
     @Size(min = 1)
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
     @Size(min = 1)
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Telefone> telefones = new ArrayList<>();
 
     @Column(name = "data_cadastro")

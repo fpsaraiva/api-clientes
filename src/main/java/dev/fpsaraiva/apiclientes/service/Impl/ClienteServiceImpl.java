@@ -32,4 +32,12 @@ public class ClienteServiceImpl implements ClienteService {
     public Optional<Cliente> getById(Long id) {
         return clienteRepository.findById(id);
     }
+
+    @Override
+    public void delete(Cliente cliente) {
+        if(cliente == null || cliente.getId() == null) {
+            throw new IllegalArgumentException("Cliente não pode ser/possuir ID nulo.");
+        }
+        clienteRepository.delete(cliente);
+    }
 }
