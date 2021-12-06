@@ -28,10 +28,22 @@ public class Endereco {
     @Column(name = "data_cadastro")
     private LocalDateTime criadoEm;
 
+    @Deprecated
+    public Endereco() {
+    }
+
     public Endereco(String endereco, String cidade, Cliente cliente) {
         this.endereco = endereco;
         this.cidade = cidade;
         this.cliente = cliente;
         this.criadoEm = LocalDateTime.now();
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public String getCidade() {
+        return cidade;
     }
 }

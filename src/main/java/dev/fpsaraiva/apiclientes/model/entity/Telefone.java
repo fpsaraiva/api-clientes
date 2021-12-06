@@ -31,10 +31,22 @@ public class Telefone {
     @Column(name = "data_cadastro")
     private LocalDateTime criadoEm;
 
+    @Deprecated
+    public Telefone() {
+    }
+
     public Telefone(String numero, TipoTelefone tipo, Cliente cliente) {
         this.numero = numero;
         this.tipo = tipo;
         this.cliente = cliente;
         this.criadoEm = LocalDateTime.now();
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public TipoTelefone getTipo() {
+        return tipo;
     }
 }

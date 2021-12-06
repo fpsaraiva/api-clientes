@@ -53,6 +53,22 @@ public class Cliente {
         return id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
     public boolean possuiDocumentoCadastrado(ClienteRepository clienteRepository) {
         return clienteRepository.existsByDocumento(documento);
     }
