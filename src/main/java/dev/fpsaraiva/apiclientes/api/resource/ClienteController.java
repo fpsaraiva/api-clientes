@@ -1,6 +1,7 @@
 package dev.fpsaraiva.apiclientes.api.resource;
 
 import dev.fpsaraiva.apiclientes.api.dto.ClienteDTORequest;
+import dev.fpsaraiva.apiclientes.exception.ApiErroException;
 import dev.fpsaraiva.apiclientes.model.entity.Cliente;
 import dev.fpsaraiva.apiclientes.service.ClienteService;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -32,4 +34,20 @@ public class ClienteController {
                 .buildAndExpand(novoCliente.getId())
                 .toUri()).build();
     }
+
+    @GetMapping("/{id}")
+    public String getClientById(@PathVariable Long id) {
+        try {
+            Cliente clienteBuscado = clienteService.getById(id).get();
+            return "achou";
+        } catch (NoSuchElementException ex) {
+            throw new ApiErroException(HttpStatus.NOT_FOUND, "Não foi encontrado cliente com o ID informado.");
+        }
+    }
+
+    //TODO: listar todos clientes
+
+    //TODO: atualizar cliente
+
+    //TODO: deletar cliente
 }

@@ -37,6 +37,10 @@ public class Cliente {
     @Column(name = "data_cadastro")
     private LocalDateTime criadoEm;
 
+    @Deprecated
+    public Cliente() {
+    }
+
     public Cliente(String nome, String documento, List<EnderecoDTORequest> enderecos, List<TelefoneDTORequest> telefones) {
         this.nome = nome;
         this.documento = documento;
