@@ -1,6 +1,7 @@
 package dev.fpsaraiva.apiclientes.api.dto;
 
 import dev.fpsaraiva.apiclientes.model.entity.Cliente;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,4 +44,6 @@ public class ClienteDTOResponse {
     public List<TelefoneDTOResponse> getTelefones() {
         return telefones;
     }
+
+    public static Page<ClienteDTOResponse> toList(Page<Cliente> page) { return  page.map(ClienteDTOResponse::new); }
 }

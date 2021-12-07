@@ -4,6 +4,8 @@ import dev.fpsaraiva.apiclientes.exception.ApiErroException;
 import dev.fpsaraiva.apiclientes.model.entity.Cliente;
 import dev.fpsaraiva.apiclientes.model.repository.ClienteRepository;
 import dev.fpsaraiva.apiclientes.service.ClienteService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,11 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    public Page<Cliente> getAll(Pageable page) {
+        return clienteRepository.findAll(page);
+    }
+
+    @Override
     public Optional<Cliente> getById(Long id) {
         return clienteRepository.findById(id);
     }
@@ -40,4 +47,5 @@ public class ClienteServiceImpl implements ClienteService {
         }
         clienteRepository.delete(cliente);
     }
+
 }
