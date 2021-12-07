@@ -23,6 +23,7 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/api/clientes")
 @Api("API Cliente")
+@CrossOrigin("http://localhost:4200")
 public class ClienteController {
 
     private ClienteService clienteService;
@@ -64,7 +65,9 @@ public class ClienteController {
         }
     }
 
-/*    @PatchMapping("/{id}")
+    /*
+    Endpoint desativado para futura refatoração. A estratégia de atualização adotada não está funcionando.
+    @PatchMapping("/{id}")
       @ApiOperation("Atualiza cliente pelo ID")
     public ResponseEntity<?> updateCliente(@PathVariable Long id, @RequestBody ClienteDTOUpdateRequest dto) {
         try {

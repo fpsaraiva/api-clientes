@@ -26,11 +26,13 @@ public class Cliente {
     @NotBlank
     private String documento;
 
-    @Size(min = 1)
+    //Anotação desativada para realização de testes no frontend
+    //@Size(min = 1)
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
-    @Size(min = 1)
+    //Anotação desativada para realização de testes no frontend
+    //@Size(min = 1)
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Telefone> telefones = new ArrayList<>();
 

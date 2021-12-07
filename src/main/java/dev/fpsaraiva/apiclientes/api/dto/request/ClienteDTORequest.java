@@ -15,25 +15,34 @@ public class ClienteDTORequest {
     private String nome;
 
     @NotBlank
+    //Anotação desativada para realização de testes de cadastro em desenvolvimento
     //@ValidDocument
     private String documento;
 
     @NotNull
-    @Size(min = 1)
+    //Anotação desativada para realização de testes no frontend
+    //@Size(min = 1)
     @Valid
     private List<EnderecoDTORequest> enderecos = new ArrayList<>();
 
     @NotNull
-    @Size(min = 1)
+    //Anotação desativada para realização de testes no frontend
+    //@Size(min = 1)
     @Valid
     private List<TelefoneDTORequest> telefones = new ArrayList<>();
 
-    public ClienteDTORequest(String nome, String documento, List<EnderecoDTORequest> enderecos, List<TelefoneDTORequest> telefones) {
+    public ClienteDTORequest(String nome, String documento) {
+        this.nome = nome;
+        this.documento = documento;
+    }
+
+    //Construtor desativado para realização de testes no frontend
+/*    public ClienteDTORequest(String nome, String documento, List<EnderecoDTORequest> enderecos, List<TelefoneDTORequest> telefones) {
         this.nome = nome;
         this.documento = documento;
         this.enderecos.addAll(enderecos);
         this.telefones.addAll(telefones);
-    }
+    }*/
 
     public List<EnderecoDTORequest> getEnderecos() {
         return enderecos;
