@@ -6,6 +6,8 @@ import dev.fpsaraiva.apiclientes.api.dto.response.ClienteDTOResponse;
 import dev.fpsaraiva.apiclientes.exception.ApiErroException;
 import dev.fpsaraiva.apiclientes.model.entity.Cliente;
 import dev.fpsaraiva.apiclientes.service.ClienteService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,6 +22,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/clientes")
+@Api("API Cliente")
 public class ClienteController {
 
     private ClienteService clienteService;
@@ -30,6 +33,7 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Cria um cliente")
     public ResponseEntity<?> createCliente(@RequestBody @Valid ClienteDTORequest dto,
                                     UriComponentsBuilder uriComponentsBuilder) {
         Cliente novoCliente = dto.toModel();
@@ -42,6 +46,7 @@ public class ClienteController {
     }
 
     @GetMapping
+    @ApiOperation("Lista todos clientes")
     //Atributos do @PegeableDefault que podem ser definidos na requisição: size (número de resultados por página) e page (número da pagina)
     public ResponseEntity<?> getClientes(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable page) {
         Page<Cliente> clientesCadastrados = clienteService.getAll(page);
@@ -49,6 +54,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Obtém detalhes de cliente pelo ID")
     public ClienteDTOResponse getClienteById(@PathVariable Long id) {
         try {
             Cliente clienteBuscado = clienteService.getById(id).get();
@@ -59,6 +65,7 @@ public class ClienteController {
     }
 
 /*    @PatchMapping("/{id}")
+      @ApiOperation("Atualiza cliente pelo ID")
     public ResponseEntity<?> updateCliente(@PathVariable Long id, @RequestBody ClienteDTOUpdateRequest dto) {
         try {
             Cliente clienteBuscado = clienteService.getById(id).get();
@@ -73,6 +80,7 @@ public class ClienteController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiOperation("Deleta cliente pelo ID")
     public void deleteCliente(@PathVariable Long id) {
         try {
             Cliente clienteBuscado = clienteService.getById(id).get();
