@@ -37,13 +37,14 @@ public class ClienteDTOResponse {
         return documento;
     }
 
+/*  Ajuste realizado para teste de integração com front (listagem de clientes)
     public List<EnderecoDTOResponse> getEnderecos() {
         return enderecos;
     }
 
     public List<TelefoneDTOResponse> getTelefones() {
         return telefones;
-    }
+    }*/
 
     public static Page<ClienteDTOResponse> toList(Page<Cliente> page) { return  page.map(ClienteDTOResponse::new); }
 }
