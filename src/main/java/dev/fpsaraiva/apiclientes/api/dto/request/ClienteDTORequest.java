@@ -1,4 +1,4 @@
-package dev.fpsaraiva.apiclientes.api.dto;
+package dev.fpsaraiva.apiclientes.api.dto.request;
 
 import dev.fpsaraiva.apiclientes.model.entity.Cliente;
 

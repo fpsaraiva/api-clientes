@@ -10,9 +10,11 @@ public interface ClienteService {
 
     Cliente save(Cliente cliente);
 
+    Page<Cliente> getAll(Pageable page);
+
     Optional<Cliente> getById(Long id);
 
-    void delete(Cliente cliente);
+    Cliente update(Cliente cliente);
 
-    Page<Cliente> getAll(Pageable page);
+    void delete(Cliente cliente);
 }

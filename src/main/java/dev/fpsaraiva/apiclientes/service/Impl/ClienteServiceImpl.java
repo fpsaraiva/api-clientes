@@ -26,7 +26,6 @@ public class ClienteServiceImpl implements ClienteService {
             throw new ApiErroException(HttpStatus.UNPROCESSABLE_ENTITY,
                     "Não é possível cadastrar mais de um cliente com o mesmo documento.");
         }
-
         return clienteRepository.save(cliente);
     }
 
@@ -38,6 +37,14 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Optional<Cliente> getById(Long id) {
         return clienteRepository.findById(id);
+    }
+
+    @Override
+    public Cliente update(Cliente cliente) {
+        if(cliente == null || cliente.getId() == null) {
+            throw new IllegalArgumentException("Cliente não pode ser/possuir ID nulo.");
+        }
+        return clienteRepository.save(cliente);
     }
 
     @Override

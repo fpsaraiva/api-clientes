@@ -1,7 +1,7 @@
 package dev.fpsaraiva.apiclientes.model.entity;
 
-import dev.fpsaraiva.apiclientes.api.dto.EnderecoDTORequest;
-import dev.fpsaraiva.apiclientes.api.dto.TelefoneDTORequest;
+import dev.fpsaraiva.apiclientes.api.dto.request.EnderecoDTORequest;
+import dev.fpsaraiva.apiclientes.api.dto.request.TelefoneDTORequest;
 import dev.fpsaraiva.apiclientes.model.repository.ClienteRepository;
 
 import javax.persistence.*;
@@ -67,6 +67,10 @@ public class Cliente {
 
     public List<Telefone> getTelefones() {
         return telefones;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public boolean possuiDocumentoCadastrado(ClienteRepository clienteRepository) {

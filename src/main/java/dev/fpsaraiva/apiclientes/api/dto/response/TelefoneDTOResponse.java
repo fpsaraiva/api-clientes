@@ -1,4 +1,4 @@
-package dev.fpsaraiva.apiclientes.api.dto;
+package dev.fpsaraiva.apiclientes.api.dto.response;
 
 import dev.fpsaraiva.apiclientes.model.entity.Telefone;
 import dev.fpsaraiva.apiclientes.model.enums.TipoTelefone;
