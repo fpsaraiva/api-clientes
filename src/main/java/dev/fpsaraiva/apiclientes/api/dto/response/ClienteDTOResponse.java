@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class ClienteDTOResponse {
 
+    private Long id;
+
     private String nome;
 
     private String documento;
@@ -17,6 +19,7 @@ public class ClienteDTOResponse {
     private List<TelefoneDTOResponse> telefones;
 
     public ClienteDTOResponse(Cliente cliente) {
+        this.id = cliente.getId();
         this.nome = cliente.getNome();
         this.documento = cliente.getDocumento();
         this.enderecos = cliente.getEnderecos()
@@ -28,6 +31,8 @@ public class ClienteDTOResponse {
                 .map(TelefoneDTOResponse::new)
                 .collect(Collectors.toList());
     }
+
+    public Long getId() { return id; }
 
     public String getNome() {
         return nome;
