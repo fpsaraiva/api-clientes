@@ -1,5 +1,6 @@
 package dev.fpsaraiva.apiclientes.api.resource;
 
+import dev.fpsaraiva.apiclientes.api.dto.request.UsuarioDTORequest;
 import dev.fpsaraiva.apiclientes.model.entity.Usuario;
 import dev.fpsaraiva.apiclientes.model.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,8 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void salvar(@RequestBody @Valid Usuario usuario) {
-        usuarioRepository.save(usuario);
+    public void salvar(@RequestBody @Valid UsuarioDTORequest dto) {
+        Usuario novoUsuario = dto.toModel();
+        usuarioRepository.save(novoUsuario);
     }
 }
