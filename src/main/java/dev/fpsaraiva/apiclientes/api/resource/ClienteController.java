@@ -3,6 +3,7 @@ package dev.fpsaraiva.apiclientes.api.resource;
 import dev.fpsaraiva.apiclientes.api.dto.request.ClienteDTORequest;
 import dev.fpsaraiva.apiclientes.api.dto.request.ClienteDTOUpdateRequest;
 import dev.fpsaraiva.apiclientes.api.dto.response.ClienteDTOResponse;
+import dev.fpsaraiva.apiclientes.api.dto.response.ClienteDTOUpdateResponse;
 import dev.fpsaraiva.apiclientes.exception.ApiErroException;
 import dev.fpsaraiva.apiclientes.model.entity.Cliente;
 import dev.fpsaraiva.apiclientes.service.ClienteService;
@@ -65,21 +66,20 @@ public class ClienteController {
         }
     }
 
-    /*
-    Endpoint desativado para futura refatoração. A estratégia de atualização adotada não está funcionando.
     @PatchMapping("/{id}")
-      @ApiOperation("Atualiza cliente pelo ID")
+    @ApiOperation("Atualiza cliente pelo ID")
     public ResponseEntity<?> updateCliente(@PathVariable Long id, @RequestBody ClienteDTOUpdateRequest dto) {
         try {
             Cliente clienteBuscado = clienteService.getById(id).get();
-            System.out.println(clienteBuscado);
             clienteBuscado.setNome(dto.getNome());
+            clienteBuscado.setDocumento(dto.getDocumento());
             clienteBuscado = clienteService.update(clienteBuscado);
-            return ResponseEntity.ok().body(clienteBuscado);
+            ClienteDTOUpdateResponse response = new ClienteDTOUpdateResponse(clienteBuscado.getId(), clienteBuscado.getNome(), clienteBuscado.getDocumento());
+            return ResponseEntity.ok().body(response);
         } catch (NoSuchElementException ex) {
             throw new ApiErroException(HttpStatus.NOT_FOUND, "Não foi encontrado cliente com o ID informado.");
         }
-    }*/
+    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

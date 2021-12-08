@@ -75,6 +75,8 @@ public class Cliente {
         this.nome = nome;
     }
 
+    public void setDocumento(String documento) { this.documento = documento; }
+
     public boolean possuiDocumentoCadastrado(ClienteRepository clienteRepository) {
         return clienteRepository.existsByDocumento(documento);
     }

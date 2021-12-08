@@ -4,15 +4,16 @@ public class ClienteDTOUpdateRequest {
 
     private String nome;
 
-    @Deprecated
-    public ClienteDTOUpdateRequest() {
-    }
+    private String documento;
 
-    public ClienteDTOUpdateRequest(String nome) {
+    public ClienteDTOUpdateRequest(String nome, String documento) {
         this.nome = nome;
+        this.documento = documento;
     }
 
     public String getNome() {
         return nome;
     }
+
+    public String getDocumento() { return documento; }
 }
