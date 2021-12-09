@@ -1,4 +1,4 @@
-package dev.fpsaraiva.apiclientes.config;
+package dev.fpsaraiva.apiclientes.config.auth;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

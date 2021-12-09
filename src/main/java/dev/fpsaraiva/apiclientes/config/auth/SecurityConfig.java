@@ -1,4 +1,4 @@
-package dev.fpsaraiva.apiclientes.config;
+package dev.fpsaraiva.apiclientes.config.auth;
 
 
 import dev.fpsaraiva.apiclientes.service.UsuarioService;

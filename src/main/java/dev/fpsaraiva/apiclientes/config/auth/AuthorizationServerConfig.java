@@ -1,4 +1,4 @@
-package dev.fpsaraiva.apiclientes.config;
+package dev.fpsaraiva.apiclientes.config.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
