@@ -8,6 +8,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +23,9 @@ public class HandlerAdvice {
         BindingResult bindingResult = methodArgumentNotValidException.getBindingResult();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         fieldErrors.forEach(fieldError -> {
-            String message = String.format("Campo %s %s", fieldError.getField(), fieldError.getDefaultMessage());
+            //Mensagem original, antes da alteração para teste no frontend (formulario cadastro usuario)
+            //String message = String.format("Campo %s %s", fieldError.getField(), fieldError.getDefaultMessage());
+            String message = String.format(fieldError.getDefaultMessage());
             mensagens.add(message);
         });
 
@@ -46,5 +49,14 @@ public class HandlerAdvice {
 
         ErroPadronizado erroPadronizado = new ErroPadronizado(mensagens);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erroPadronizado);
+    }
+
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity handleResponseStatusException(ResponseStatusException ex) {
+        Collection<String> mensagens = new ArrayList<>();
+        mensagens.add(ex.getReason());
+        HttpStatus codigoStatus = ex.getStatus();
+        ErroPadronizado erroPadronizado = new ErroPadronizado(mensagens);
+        return new ResponseEntity(erroPadronizado, codigoStatus);
     }
 }
