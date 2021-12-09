@@ -1,10 +1,12 @@
 package dev.fpsaraiva.apiclientes.api.resource;
 
 import dev.fpsaraiva.apiclientes.api.dto.request.UsuarioDTORequest;
+import dev.fpsaraiva.apiclientes.exception.UsuarioCadastradoException;
 import dev.fpsaraiva.apiclientes.model.entity.Usuario;
-import dev.fpsaraiva.apiclientes.model.repository.UsuarioRepository;
+import dev.fpsaraiva.apiclientes.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -12,16 +14,20 @@ import javax.validation.Valid;
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
 
-    public UsuarioController(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void salvar(@RequestBody @Valid UsuarioDTORequest dto) {
-        Usuario novoUsuario = dto.toModel();
-        usuarioRepository.save(novoUsuario);
+        try {
+            Usuario novoUsuario = dto.toModel();
+            usuarioService.salvar(novoUsuario);
+        } catch (UsuarioCadastradoException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+        }
     }
 }

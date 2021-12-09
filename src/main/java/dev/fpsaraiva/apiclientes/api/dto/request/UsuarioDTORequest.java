@@ -6,10 +6,10 @@ import javax.validation.constraints.NotBlank;
 
 public class UsuarioDTORequest {
 
-    @NotBlank
+    @NotBlank(message = "{campo.login.obrigatorio}")
     private String username;
 
-    @NotBlank
+    @NotBlank(message = "{campo.senha.obrigatorio}")
     private String password;
 
     @Deprecated
