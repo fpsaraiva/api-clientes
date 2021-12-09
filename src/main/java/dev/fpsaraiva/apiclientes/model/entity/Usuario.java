@@ -16,6 +16,10 @@ public class Usuario {
     @Column(name = "senha")
     private String password;
 
+    @Deprecated
+    public Usuario() {
+    }
+
     public Usuario(String username, String password) {
         this.username = username;
         this.password = password;
